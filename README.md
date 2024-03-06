@@ -62,12 +62,12 @@ ca:
 ```golang
     // 将以下代码注释打开
     //from := source.Intn(int(config.AddrNum))
-		//to := source.Intn(int(config.AddrNum))
-		//args = [][]byte{
-		//	[]byte("sendPayment"),
-		//	[]byte(fmt.Sprintf("%x", from)),
-		//	[]byte(fmt.Sprintf("%x", to)),
-		//	[]byte("10"),
-		//}
+    //to := source.Intn(int(config.AddrNum))
+    //args = [][]byte{
+    //	[]byte("sendPayment"),
+    //	[]byte(fmt.Sprintf("%x", from)),
+    //	[]byte(fmt.Sprintf("%x", to)),
+    //	[]byte("10"),
+    //}
 ```
 
