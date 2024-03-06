@@ -56,3 +56,18 @@ order:
 
 ca:
   crt: "cert/ca.crt"
+```
+## 4、证明满足原子性和一致性
+打开main.go中用于测试事务的原子性的代码
+```golang
+    // 将以下代码注释打开
+    //from := source.Intn(int(config.AddrNum))
+		//to := source.Intn(int(config.AddrNum))
+		//args = [][]byte{
+		//	[]byte("sendPayment"),
+		//	[]byte(fmt.Sprintf("%x", from)),
+		//	[]byte(fmt.Sprintf("%x", to)),
+		//	[]byte("10"),
+		//}
+```
+
