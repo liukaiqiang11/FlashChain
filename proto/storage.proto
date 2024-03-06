@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+option go_package = "./;pb";
+
+package pb;
+
+message LastBlockInfo {
+  uint64 LastBlockNum      = 1;
+  bytes  LastBlockHash     = 2;
+  bytes  PreviousBlockHash = 3;
+}
+
+
+message BlockchainInfo {
+  uint64 Height            = 1;
+  bytes  CurrentBlockHash  = 2;
+  bytes  PreviousBlockHash = 3;
+}
+

@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+option go_package = "./;pb";
+
+import "proposal_response.proto";
+
+package pb;
+
+message SignedProposal {
+  bytes ProposalBytes = 1;
+  bytes Signature     = 2;
+}
+
+message Proposal {
+  bytes Header    = 1;
+  bytes Payload   = 2;
+  bytes Extension = 3;
+}
+
+message ChaincodeAction {
+  bytes       Results     = 1;
+  Response    Response    = 2;
+}
+

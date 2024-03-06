@@ -1,0 +1,89 @@
+syntax = "proto3";
+
+option go_package = "./;pb";
+
+package pb;
+
+import "google/protobuf/timestamp.proto";
+import "proposal.proto";
+import "storage.proto";
+import "proposal_response.proto";
+
+
+enum ChaincodeMessage_Type{
+  UNDEFINED             = 0;
+  REGISTER              = 1;
+  REGISTERED            = 2;
+  INIT                  = 3;
+  READY                 = 4;
+  TRANSACTION           = 5;
+  COMPLETED             = 6;
+  ERROR                 = 7;
+  GET_STATE             = 8;
+  PUT_STATE             = 9;
+  DEL_STATE             = 10;
+  INVOKE_CHAINCODE      = 11;
+  ONLY_READ_TRANSACTION = 12;
+  RESPONSE              = 13;
+  GET_STATE_BY_RANGE    = 14;
+  GET_QUERY_RESULT      = 15;
+  QUERY_STATE_NEXT      = 16;
+  QUERY_STATE_CLOSE     = 17;
+  KEEPALIVE             = 18;
+  GET_HISTORY_FOR_KEY   = 19;
+  GET_STATE_METADATA    = 20;
+  PUT_STATE_METADATA    = 21;
+  GET_PRIVATE_DATA_HASH = 22;
+  PURGE_PRIVATE_DATA    = 23;
+}
+
+enum ValidateMessage_Type{
+  VALIDATE           = 0;
+  VALIDATE_COMPLETED = 1;
+  VALIDATE_SUCCESS   = 2;
+  VALIDATE_FAIL      = 3;
+}
+
+message ChaincodeMessage {
+  ChaincodeMessage_Type Type      = 1;
+  uint64                Timestamp = 2;
+  bytes                 Payload   = 3;
+  string                TxID      = 4;
+  SignedProposal        Proposal  = 5;
+}
+
+message GetState {
+  string Key = 1;
+}
+
+message PutState {
+  string Key   = 1;
+  bytes  Value = 2;
+}
+
+message DelState {
+  string Key = 1;
+}
+
+message Empty{
+}
+
+message ValidateMessage {
+  ValidateMessage_Type      Type      = 1;
+  google.protobuf.Timestamp Timestamp = 2;
+  bytes                     Payload   = 3;
+  Response                  Response  = 4;
+}
+
+service ChaincodeSupport{
+  rpc StartPeer(Empty) returns(Empty);
+  rpc EndPeer(Empty) returns(Empty);
+  rpc Register(stream ChaincodeMessage) returns(stream ChaincodeMessage);
+  rpc GetBlockInfo(Empty) returns(BlockchainInfo);
+  rpc ValidateBlock(ValidateMessage) returns(ValidateMessage);
+}
+
+service Chaincode{
+  rpc Connect(stream ChaincodeMessage) returns(stream ChaincodeMessage){
+  }
+}

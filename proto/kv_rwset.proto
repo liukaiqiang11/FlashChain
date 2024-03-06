@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+option go_package = "./;pb";
+
+package pb;
+
+message KVRWSet {
+  string           TxID       = 1;
+  repeated KVRead  Reads      = 2;
+  repeated KVWrite Writes     = 3;
+}
+
+message KVRead {
+  string  Key     = 1;
+  Version Version = 2;
+}
+
+message Version {
+  uint64 BlockNum = 1;
+  uint64 GroupNum = 2;
+  uint64 TxNum    = 3;
+}
+
+message KVWrite {
+  string Key      = 1;
+  bool   IsDelete = 2;
+  bytes  Value    = 3;
+}
+
+

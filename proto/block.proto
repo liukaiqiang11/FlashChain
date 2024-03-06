@@ -1,0 +1,94 @@
+syntax = "proto3";
+
+option go_package = "./;pb";
+
+import "google/protobuf/timestamp.proto";
+
+// 事务验证码
+enum TxValidationCode  {
+  VALID                        = 0;
+  NIL_ENVELOPE                 = 1;
+  BAD_PAYLOAD                  = 2;
+  BAD_SIGNATURE_HEADER         = 3;
+  BAD_CREATOR_SIGNATURE        = 4;
+  INVALID_ENDORSER_TRANSACTION = 5;
+  BAD_TXID                     = 6;
+  NIL_TXACTION                 = 7;
+  BAD_RWSET                    = 8;
+  NOT_VALIDATED                = 254;
+  INVALID_OTHER_REASON         = 255;
+}
+
+// 一个区块由区块头，区块体和元数据组成
+message Block {
+  BlockHeader   header   = 1;
+  BlockData     data     = 2;
+  BlockMetadata metadata = 3;
+}
+
+// 区块头包含区块高度，前一个区块的hash，本区快的hash，区块体的hash以及区块生成时间
+message BlockHeader {
+  uint64                    Number       = 1;
+  bytes                     PreviousHash = 2;
+  bytes                     Hash         = 3;
+  google.protobuf.Timestamp Timestamp    = 4;
+  bytes                     DataHash     = 5;
+}
+
+// 区块体包含一个事务组的数组
+message BlockData {
+  repeated bytes Data = 1;
+}
+
+// 事务组由一个信封数组构成
+message Envelopes {
+  repeated Envelope Envelope = 1;
+}
+
+// 每个信封都代表一个事务，里面包含事务ID，事务的具体内容和创建者对这笔事务的签名
+message Envelope {
+  string txID      = 1;
+  bytes  Payload   = 2;
+  bytes  Signature = 3;
+}
+
+// 事务的载荷由签名头和消息体组成
+message Payload {
+  SignatureHeader SignatureHeader = 1;
+  bytes           Data            = 2;
+}
+
+// 签名头由Creator和随机数组成
+message SignatureHeader {
+  bytes Creator = 1;
+  bytes Nonce   = 2;
+}
+
+// Creator中包含签名者的公钥及其所属组织名称
+message Creator {
+  bytes  IdBytes = 1;
+  string Mspid   = 2;
+}
+
+// 区块的元数据由签名者，签名者的签名以及每笔事务的验证码构成
+message BlockMetadata {
+  SignatureHeader          SignatureHeader   = 1;
+  bytes                    Signature         = 2;
+  repeated ValidationCodes Transaction_State = 3;
+}
+
+// 验证码用于验证事务中的每笔交易是否有效
+message ValidationCodes{
+  repeated TxValidationCode Transaction_State = 1;
+}
+
+
+
+
+
+
+
+
+
+
+

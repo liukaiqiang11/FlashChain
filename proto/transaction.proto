@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+option go_package = "./;pb";
+
+import "chaincode.proto";
+import "proposal_response.proto";
+
+package pb;
+
+message Transaction {
+  ChaincodeActionPayload Payload = 1;
+}
+
+message ChaincodeActionPayload {
+  ChaincodeSpec        Input                   = 1;
+  repeated Endorsement Endorsements            = 2;
+  bytes                ProposalResponsePayload = 3;
+}
+
+
+
+
+
+
+
+
+
+
