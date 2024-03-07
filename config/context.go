@@ -69,8 +69,8 @@ func init() {
 	if err != nil {
 		panic(err)
 	}
-	ProjectPath = pwd + "\\"
-	configFilePath = pwd + "\\config\\"
+	ProjectPath = pwd + "/"
+	configFilePath = pwd + "/config/"
 
 	ClientConf, err = GetClientConf()
 	if err != nil {
