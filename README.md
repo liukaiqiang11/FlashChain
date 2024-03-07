@@ -5,6 +5,7 @@
 ### 运行代码
 `go run main.go`
 ## 3、修改配置文件
+### 配置文件地址(config--config.yaml).
 ```yml
 block:
 #  区块大小
