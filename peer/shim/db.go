@@ -50,25 +50,21 @@ func GetStateDB() {
 			line = fmt.Sprintf("账号:%s, 余额:%s, BlockNum:%d, GroupNum:%d, TxNum:%d\n",
 				key, value.Value, BlockNumber, GroupNum, TxNum)
 			fields := strings.Fields(line)
-			if val != 100 && BlockNumber != 0 || GroupNum != 0 || TxNum != 0 {
-				for i, field := range fields {
-					// 根据最大宽度对齐字段
-					format := fmt.Sprintf("%%-%ds", maxColWidths[i])
-					fmt.Printf(format, field)
+			for i, field := range fields {
+				// 根据最大宽度对齐字段
+				format := fmt.Sprintf("%%-%ds", maxColWidths[i])
+				fmt.Printf(format, field)
 
-					// 打印字段之间的分隔符
-					if i < len(fields)-1 {
-						fmt.Print(" | ")
-					}
+				// 打印字段之间的分隔符
+				if i < len(fields)-1 {
+					fmt.Print(" | ")
 				}
-				fmt.Println()
 			}
+			fmt.Println()
 		} else if config.ContractName == "KvStore" {
-			val, _ := strconv.Atoi(string(value.Value))
-			if val != 100 && BlockNumber != 0 || GroupNum != 0 || TxNum != 0 {
-				fmt.Printf("key:%s, value:%v, BlockNum:%d, GroupNum:%d, TxNum:%d\n",
-					key, value.Value, value.Version.BlockNum, value.Version.GroupNum, value.Version.TxNum)
-			}
+		val, _ := strconv.Atoi(string(value.Value))
+			fmt.Printf("key:%s, value:%v, BlockNum:%d, GroupNum:%d, TxNum:%d\n",
+				key, value.Value, value.Version.BlockNum, value.Version.GroupNum, value.Version.TxNum)
 		}
 	})
 
