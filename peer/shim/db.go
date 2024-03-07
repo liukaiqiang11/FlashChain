@@ -62,9 +62,8 @@ func GetStateDB() {
 			}
 			fmt.Println()
 		} else if config.ContractName == "KvStore" {
-		val, _ := strconv.Atoi(string(value.Value))
-			fmt.Printf("key:%s, value:%v, BlockNum:%d, GroupNum:%d, TxNum:%d\n",
-				key, value.Value, value.Version.BlockNum, value.Version.GroupNum, value.Version.TxNum)
+		fmt.Printf("key:%s, value:%v, BlockNum:%d, GroupNum:%d, TxNum:%d\n",
+			key, value.Value, BlockNumber, GroupNum, TxNum)
 		}
 	})
 
