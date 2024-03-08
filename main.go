@@ -48,27 +48,27 @@ func getRandomArgs() [][]byte {
 		if source.Float64() <= config.Ratio {
 			args = [][]byte{
 				[]byte("getBalance"),
-				[]byte(fmt.Sprintf("%x", z.Uint64())),
+				[]byte(fmt.Sprintf("%d", z.Uint64())),
 			}
 		} else {
 			switch randNum {
 			case 0:
 				args = [][]byte{
 					[]byte(selectFunc[randNum]),
-					[]byte(fmt.Sprintf("%x", z.Uint64())),
-					[]byte(fmt.Sprintf("%x", z.Uint64())),
+					[]byte(fmt.Sprintf("%d", z.Uint64())),
+					[]byte(fmt.Sprintf("%d", z.Uint64())),
 				}
 			case 1, 2, 4:
 				args = [][]byte{
 					[]byte(selectFunc[randNum]),
-					[]byte(fmt.Sprintf("%x", z.Uint64())),
+					[]byte(fmt.Sprintf("%d", z.Uint64())),
 					[]byte("10"),
 				}
 			case 3:
 				args = [][]byte{
 					[]byte(selectFunc[randNum]),
-					[]byte(fmt.Sprintf("%x", z.Uint64())),
-					[]byte(fmt.Sprintf("%x", z.Uint64())),
+					[]byte(fmt.Sprintf("%d", z.Uint64())),
+					[]byte(fmt.Sprintf("%d", z.Uint64())),
 					[]byte("10"),
 				}
 			default:
@@ -80,8 +80,8 @@ func getRandomArgs() [][]byte {
 		//to := source.Intn(int(config.AddrNum))
 		//args = [][]byte{
 		//	[]byte("sendPayment"),
-		//	[]byte(fmt.Sprintf("%x", from)),
-		//	[]byte(fmt.Sprintf("%x", to)),
+		//	[]byte(fmt.Sprintf("%d", from)),
+		//	[]byte(fmt.Sprintf("%d", to)),
 		//	[]byte("10"),
 		//}
 	} else if config.ContractName == "KvStore" {
@@ -91,7 +91,7 @@ func getRandomArgs() [][]byte {
 		if source.Float64() <= config.Ratio {
 			args = [][]byte{
 				[]byte("read"),
-				[]byte(fmt.Sprintf("%x", z.Uint64())),
+				[]byte(fmt.Sprintf("%d", z.Uint64())),
 			}
 		} else {
 			byteArray := make([]byte, 100) // 创建一个长度为 100 的字节数组
@@ -102,7 +102,7 @@ func getRandomArgs() [][]byte {
 			}
 			args = [][]byte{
 				[]byte("write"),
-				[]byte(fmt.Sprintf("%x", z.Uint64())),
+				[]byte(fmt.Sprintf("%d", z.Uint64())),
 				byteArray,
 			}
 		}
