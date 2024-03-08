@@ -50,11 +50,11 @@ func (cs *ChaincodeServer) StartPeer(ctx context.Context, e *pb.Empty) (*pb.Empt
 	for i := 0; i < int(config.AddrNum); i++ {
 		if config.ContractName == "SmallBank" {
 			value := &StateDB{Value: []byte("100"), Version: &pb.Version{}}
-			State.Set(fmt.Sprintf("saving_%x", i), value)
-			State.Set(fmt.Sprintf("checking_%x", i), value)
+			State.Set(fmt.Sprintf("saving_%d", i), value)
+			State.Set(fmt.Sprintf("checking_%d", i), value)
 		} else if config.ContractName == "KvStore" {
 			value := &StateDB{Value: []byte{}, Version: &pb.Version{}}
-			State.Set(fmt.Sprintf("%x", i), value)
+			State.Set(fmt.Sprintf("%d", i), value)
 		}
 	}
 	StartTime = time.Now()
