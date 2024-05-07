@@ -28,7 +28,6 @@ func LoadConfig() (*tls.Config, error) {
 
 	return &tls.Config{
 		Certificates: []tls.Certificate{cert}, //客户端证书
-		ServerName:   conf.MSPID,              //注意这里的参数为配置文件中所允许的ServerName，也就是其中配置的DNS...
 		RootCAs:      certPool,
 	}, nil
 }
